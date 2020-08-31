@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_package = "org.example.grpc.server";
+
+message USER {
+  string ID = 1;
+  string name = 2;
+  string email = 3;
+  string telephone = 4;
+  status civil_status = 5;
+  gender gender_status = 6;
+  enum status {
+    SINGLE = 0;
+    MARRIED = 1;
+    DEVORCED = 3;
+  }
+
+  enum gender {
+    MALE = 0;
+    FEMALE = 1;
+    NOTMENTIONED = 2;
+  }
+}
+
+message USER_REPLY {
+  string message = 1;
+  string id = 2;
+}
+
+message USER_ID {
+  string id = 1;
+}
+
+message USERS_RESPONSE {
+  repeated USER user_info = 1;
+}
+
+message VOID_INPUT {
+
+}
+
+service UserInfo {
+  rpc addUser (USER) returns (USER_REPLY);
+  rpc getUser (USER_ID) returns (USER);
+  rpc getUsers (VOID_INPUT) returns (USERS_RESPONSE);
+}
